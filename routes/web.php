@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/web-scraping-in-laravel','GoutteController@doWebScraping');
+Route::get('/scrape/{url?}','GoutteController@doWebScraping');
