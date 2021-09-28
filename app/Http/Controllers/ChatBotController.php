@@ -25,10 +25,8 @@ class ChatBotController extends Controller
                 $message .= "*Followers:* $githubResponse->followers devs\n";
                 $message .= "*Following:* $githubResponse->following devs\n";
                 $message .= "*URL:* $githubResponse->html_url\n";
-                return response()->json([
-                    $message
-                ]);
-                // $this->sendWhatsAppMessage($message, $from);
+
+                $this->sendWhatsAppMessage($message, $from);
             } else {
                 $this->sendWhatsAppMessage($githubResponse->message, $from);
             }
