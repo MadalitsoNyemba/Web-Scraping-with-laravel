@@ -47,8 +47,13 @@ class ChatBotController extends Controller
         $twilio_whatsapp_number = getenv('TWILIO_WHATSAPP_NUMBER');
         $account_sid = getenv("TWILIO_SID");
         $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        try {
 
         $client = new Client($account_sid, $auth_token);
         return $client->messages->create($recipient,['from' => "whatsapp:$twilio_whatsapp_number", 'body' => $message]);
+    } catch (RequestException $th) {
+        $response = json_decode($th->getResponse()->getBody()->message);
+    }
+
     }
 }
