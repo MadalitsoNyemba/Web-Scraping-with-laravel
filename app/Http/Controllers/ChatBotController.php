@@ -26,7 +26,7 @@ class ChatBotController extends Controller
                 $message .= "*Following:* $githubResponse->following devs\n";
                 $message .= "*URL:* $githubResponse->html_url\n";
 
-                $this->sendWhatsAppMessage($message, $from);
+                $this->sendWhatsAppMessage('$message', $from);
             } else {
                 $this->sendWhatsAppMessage($githubResponse->message, $from);
             }
@@ -49,6 +49,6 @@ class ChatBotController extends Controller
         $auth_token = getenv("TWILIO_AUTH_TOKEN");
 
         $client = new Client($account_sid, $auth_token);
-        return $client->messages->create($recipient, array('from' => "whatsapp:$twilio_whatsapp_number", 'body' => $message));
+        return $client->messages->create($recipient,['from' => "whatsapp:$twilio_whatsapp_number", 'body' => $message]);
     }
 }
